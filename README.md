@@ -33,7 +33,7 @@ Emlékeztetőként a megoldások is megtalálhatóak az útmutatóban is. Előbb
 
 ## Feladat 0: Adatbázis létrehozása, ellenőrzése
 
-Az adatbázis az adott géphez kötött, ezért nem biztos, hogy a korábban létrehozott adatbázis most is létezik. Ezért először ellenőrizzük, és ha nem találjuk, akkor hozzuk létre újra az adatbázist. (Ennek mikéntjét lásd a ["Tranzakciókezelés" gyakorlat anyagában](https://github.com/BMEVIAUBB04/gyakorlat-tranzakciok).)
+Az adatbázis az adott géphez kötött, ezért nem biztos, hogy a korábban létrehozott adatbázis most is létezik. Ezért először ellenőrizzük, és ha nem találjuk, akkor hozzuk létre újra az adatbázist. (Ennek mikéntjét lásd a ["Tranzakciókezelés" gyakorlat anyagában](https://bmeviaubb04.github.io/gyakorlat-tranzakciok/).)
 
 ## Feladat 1: Termékkategória rögzítése
 
