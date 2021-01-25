@@ -16,7 +16,7 @@ Amit érdemes átnézned:
 
 - SQL nyelv alapjai
 - Microsoft SQL Server programozása (tárolt eljárások, triggerek)
-- Microsoft SQL Server használata [segédlet](mssql-hasznalat.md) és [videó](https://youtu.be/gmY8reqSL7U)
+- Microsoft SQL Server használata [segédlet](mssql-hasznalat.md) és [videó](https://web.microsoftstream.com/video/e3a83d16-b5c4-4fe9-b027-703347951621)
 - A használt adatbázis [sémája](sema.md)
 
 Felkészülés ellenőrzése:
