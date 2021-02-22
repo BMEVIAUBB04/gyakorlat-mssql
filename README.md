@@ -31,7 +31,7 @@ Felkészülés ellenőrzése:
 
 - Otthoni teljesítés esetén nincs beugró. A fenti linken található kérdőíven ennek ellenére is ellenőrizd a tudásod.
 - A feladatokat oldd meg otthon. A feladatok megoldását megtalálod az anyagban, de a feladatod nem ezek kérdés nélküli átmásolása! Kíséreld meg önállóan megoldani a feladatot, és ha nem sikerül, meríthetsz ötletet a minta megoldásból.
-- Dokumentáld a gyakorlatot és a dokumentációt ("jegyzőkönyvet") add be. A jegyzőkönyvben azt várjuk, hogy bizonyítod a feladatok elvégzését. Minden feladatnál készíts egy képernyőképet a feladat eredményéről. Ne a kódot fényképezd le, hanem keress módot arra, hogy bemutasd, működik a megoldásod. Például, mutasd meg, hogy a kódodat hogyan hívod meg, és utána mi az eredménye - bekerül egy rekord a táblába, vagy hasonló. Minden feladatról elég egyetlen kép, ha az egyben tudja az eredményt mutatni. A gyakorlat akkor minősül teljesítettnek, ha a feladtok 50%-át elvégezted és dokumentáltad.
+- Dokumentáld a gyakorlatot és a dokumentációt ("jegyzőkönyvet") add be. A jegyzőkönyvben azt várjuk, hogy bizonyítod a feladatok elvégzését. Minden feladatnál készíts egy képernyőképet a feladat eredményéről. Ne a kódot fényképezd le, hanem keress módot arra, hogy bemutasd, működik a megoldásod. Például, mutasd meg, hogy a kódodat hogyan hívod meg, és utána mi az eredménye - bekerül egy rekord a táblába, vagy hasonló. Minden feladatról elég egyetlen kép, ha az egyben tudja az eredményt mutatni. A gyakorlat akkor minősül teljesítettnek, ha a feladatok 50%-át elvégezted és dokumentáltad.
 
 ## Gyakorlat menete
 
