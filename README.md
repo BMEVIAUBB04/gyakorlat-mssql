@@ -21,7 +21,7 @@ Amit érdemes átnézned:
 
 Felkészülés ellenőrzése:
 
-- A gyakorlatra való felkészüléshez használható [ezen kérdőív](https://forms.office.com/Pages/ResponsePage.aspx?id=q0g1anB1cUKRqFjaAGlwKf73d6yoiM1FuK24ZUEWuzFUNzUzWFIyMFg5NlQ2TllFMVgwNjdKMzk4VC4u).
+- A gyakorlatra való felkészüléshez használható [ezen kérdőív](https://forms.office.com/e/jLYwYCpdJh).
 - A gyakorlaton beugróként ugyanezen kérdőívet fogjuk használni, legalább 50% elérése szükséges.
   - Gyakorlatvezetői instrukció: a hallgató nyissa meg a kérdőívet és töltse ki. A válaszok megadása után az utolsó oldalon a "View results" gombra kattintva megtekinthető az eredmény és az elért pontszám. A hallgató ezen az oldalon álljon meg és mutassa meg eredményét a gyakorlatvezetőnek.
 
