@@ -41,7 +41,7 @@ Emlékeztetőként a megoldások is megtalálhatóak az útmutatóban is. Előbb
 
 ## Feladat 0: Adatbázis létrehozása, ellenőrzése
 
-Az adatbázis az adott géphez kötött, ezért nem biztos, hogy a korábban létrehozott adatbázis most is létezik. Ezért először ellenőrizzük, és ha nem találjuk, akkor hozzuk létre újra az adatbázist. (Ennek mikéntjét lásd a ["Tranzakciókezelés" gyakorlat anyagában](https://bmeviaubb04.github.io/gyakorlat-tranzakciok/).)
+Az adatbázis az adott géphez kötött, ezért nem biztos, hogy a korábban létrehozott adatbázis most is létezik. Ezért először ellenőrizzük, és ha nem találjuk, akkor hozzuk létre újra az adatbázist. (Ennek mikéntjét lásd a [_Tranzakciókezelés_ gyakorlat anyagában](https://bmeviaubb04.github.io/gyakorlat-tranzakciok/).)
 
 ## Feladat 1: Termékkategória rögzítése
 
@@ -60,9 +60,9 @@ as
 begin tran
 
 declare @ID int
-select @ID=ID
-from kategoria with (TABLOCKX)
-where upper(nev) = upper(@Kategoria)
+select @ID = ID
+from Kategoria with (TABLOCKX)
+where upper(Nev) = upper(@Kategoria)
 
 if @ID is not null
 begin
@@ -75,8 +75,8 @@ declare @SzuloKategoriaID int
 if @SzuloKategoria is not null
 begin
     select @SzuloKategoriaID = id
-    from kategoria
-    where upper(nev) = upper(@SzuloKategoria)
+    from Kategoria
+    where upper(Nev) = upper(@SzuloKategoria)
 
     if @SzuloKategoriaID is null
     begin
@@ -87,20 +87,22 @@ begin
 end
 
 insert into Kategoria
-values(@Kategoria,@SzuloKategoriaID)
+values(@Kategoria, @SzuloKategoriaID)
 
 commit
 ```
 
 #### Tesztelés
 
-Nyissunk egy új Query ablakot és adjuk ki az alábbi parancsot.
+Nyissunk egy új _Query_ ablakot, és adjuk ki az alábbi parancsot:
 
-`exec UjKategoria 'Uszogumik', NULL`
+```sql
+exec UjKategoria 'Uszogumik', NULL
+```
 
 Ennek sikerülnie kell. Ellenőrizzük utána a tábla tartalmát.
 
-Ismételjük meg a fenti beszúrást, ekkor már hibák kell dobjon.
+Ismételjük meg a fenti beszúrást! Ekkor már hibát kell, hogy dobjon.
 
 </details>
 
@@ -119,15 +121,17 @@ for update
 as
 
 update Megrendelestetel
-set StatuszID =i.StatuszID
+set StatuszID = i.StatuszID
 from Megrendelestetel mt
-inner join inserted i on i.Id=mt.MegrendelesID
-inner join deleted d on d.ID=mt.MegrendelesID
+inner join inserted i on i.Id = mt.MegrendelesID
+inner join deleted d on d.ID = mt.MegrendelesID
 where i.StatuszID != d.StatuszID
-  and mt.StatuszID=d.StatuszID
+  and mt.StatuszID = d.StatuszID
 ```
 
-Szánjunk egy kis időt az `update ... from` utasítás működési elvének megértésére. Az alapelvek a következők. Akkor használjuk, ha a módosítandó tábla bizonyos mezőit más tábla vagy táblák tartalma alapján szeretnénk beállítani. A szintaktika alapvetően a már megszokott `update ... set...` formát követi, kiegészítve egy `from` szakasszal, melyben már a `select from` utasításnál megismerttel azonos szintaktikával más táblákból illeszthetünk (`join`) adatokat a módosítandó táblához. Így a `set` szakaszban az illesztett táblák oszlopai is felhasználhatók adatforrásként (vagyis állhatnak az = jobb oldalán).
+Szánjunk egy kis időt az `update ... from` utasítás működési elvének megértésére. Az alapelvek a következők:
+
+Akkor használjuk, ha a módosítandó tábla bizonyos mezőit más tábla vagy táblák tartalma alapján szeretnénk beállítani. A szintaktika alapvetően a már megszokott `update ... set...` formát követi, kiegészítve egy `from` szakasszal, melyben már a `select from` utasításnál megismerttel azonos szintaktikával más táblákból illeszthetünk (`join`) adatokat a módosítandó táblához. Így a `set` szakaszban az illesztett táblák oszlopai is felhasználhatóak adatforrásként (vagyis állhatnak az `=` jobb oldalán).
 
 #### Tesztelés
 
@@ -136,36 +140,39 @@ Ellenőrizzük a megrendelés és a tételek státuszát:
 ```sql
 select megrendelestetel.statuszid, megrendeles.statuszid
 from megrendelestetel join megrendeles on
-megrendelestetel.megrendelesid=megrendeles.id
+megrendelestetel.megrendelesid = megrendeles.id
 where megrendelesid = 1
 ```
 
 Változtassuk meg a megrendelést:
 
 ```sql
-update megrendeles
-set statuszid=4
-where id=1
+update Megrendeles
+set StatuszID = 4
+where ID = 1
 ```
 
-Ellenőrizzük a megrendelést és a tételeket (update után minden
-státusznak meg kell változnia):
+Ellenőrizzük a megrendelést és a tételeket (az `update` után minden
+státusznak meg kellett változnia):
 
 ```sql
-select megrendelestetel.statuszid, megrendeles.statuszid
-from megrendelestetel join megrendeles on
-megrendelestetel.megrendelesid=megrendeles.id
-where megrendelesid = 1
+select MegrendelesTetel.StatuszID, Megrendeles.StatuszID
+from MegrendelesTetel join Megrendeles on
+MegrendelesTetel.MegrendelesID = Megrendeles.ID
+where MegrendelesID = 1
 ```
 
 </details>
 
-## Feladat 3: Vevő megrendeléseinek összegzése
+## Feladat 3: Vevők megrendeléseinek összegzése
 
-Tároljuk el a vevő összes megrendelésének végösszegét a Vevő táblában!
+Tároljuk el a vevők összes megrendelésének végösszegét a _Vevő_ táblában!
 
-1. Adjuk hozzá az a táblához az új oszlopot: `alter table vevo add vegosszeg float`
-1. Számoljuk ki az aktuális végösszeget. A megoldáshoz használjunk kurzort, ami minden vevőn megy végig.
+1. Adjuk hozzá az a táblához az új oszlopot:
+   ```sql
+   alter table vevo add vegosszeg float
+   ```
+1. Számoljuk ki az aktuális végösszeget. A megoldáshoz használjunk kurzort, ami az összes vevőn végigmegy.
 
 <details><summary markdown="span">Megoldás</summary>
 
@@ -182,8 +189,8 @@ begin
 
     select @osszeg = sum(mt.Mennyiseg * mt.NettoAr)
     from Telephely t
-    inner join Megrendeles m on m.TelephelyID=t.ID
-    inner join MegrendelesTetel mt on mt.MegrendelesID=m.ID
+    inner join Megrendeles m on m.TelephelyID = t.ID
+    inner join MegrendelesTetel mt on mt.MegrendelesID = m.ID
     where t.VevoID = @vevoId
 
     update Vevo
@@ -199,7 +206,7 @@ deallocate cur_vevo
 
 </details>
 
-## Feladat 4: Vevő összemegrendelésének karbantartása (önálló feladat)
+## Feladat 4: Vevők végösszegeinek karbantartása (önálló feladat)
 
 Az előző feladatban kiszámolt érték az aktuális állapotot tartalmazza csak. Készítsünk triggert, amivel karbantartjuk azt az összeget minden megrendelést érintő változás esetén. Az összeg újraszámolása helyett csak frissítse a változásokkal az értéket!
 
@@ -207,7 +214,7 @@ Az előző feladatban kiszámolt érték az aktuális állapotot tartalmazza csa
 
 A megoldás kulcsa meghatározni, mely táblára kell a triggert tenni. A megrendelések változása érdekes számunkra, de valójában a végösszeg a megrendeléshez felvett tételek módosulásakor fog változni, így erre a táblára kell a trigger.
 
-A feladat nehézségét az adja, hogy az `inserted` és `deleted` táblákban nem csak egy vevő adatai módosulhatnak. Egy lehetséges megoldás a korábban használt kurzoros megközelítés (itt a változásokon kell iterálni). Avagy megpróbálhatjuk megírni egy utasításban is, ügyelve arra, hogy vevők szerint csoportosítsuk a változásokat.
+A feladat nehézségét az adja, hogy az `inserted` és `deleted` táblákban nem csak egy vevő adatai módosulhatnak. Egy lehetséges megoldás a korábban használt kurzoros megközelítés (itt a változásokon kell iterálni). Vagy megpróbálhatjuk megírni egy utasításban is, ügyelve arra, hogy vevők szerint csoportosítsuk a változásokat.
 
 #### Trigger
 
@@ -218,24 +225,24 @@ for insert, update, delete
 as
 
 update Vevo
-set vegosszeg=isnull(vegosszeg,0) + OsszegValtozas
+set Vegosszeg = isnull(Vegosszeg, 0) + OsszegValtozas
 from Vevo
 inner join
-    (select t.VevoId, sum(mennyiseg * NettoAr) as OsszegValtozas
+    (select t.VevoID, sum(Mennyiseg * NettoAr) as OsszegValtozas
     from Telephely t
-    inner join Megrendeles m on m.TelephelyID=t.ID
-    inner join inserted i on i.MegrendelesID=m.ID
-    group by t.VevoId) VevoValtozas on Vevo.ID = VevoValtozas.ID
+    inner join Megrendeles m on m.TelephelyID = t.ID
+    inner join inserted i on i.MegrendelesID = m.ID
+    group by t.VevoId) VevoValtozas on Vevo.ID = VevoValtozas.VevoID
 
 update Vevo
-set vegosszeg=isnull(vegosszeg,0) - OsszegValtozas
+set Vegosszeg = isnull(Vegosszeg, 0) - OsszegValtozas
 from Vevo
 inner join
-    (select t.VevoId, sum(mennyiseg * NettoAr) as OsszegValtozas
+    (select t.VevoId, sum(Mennyiseg * NettoAr) as OsszegValtozas
     from Telephely t
-    inner join Megrendeles m on m.TelephelyID=t.ID
-    inner join deleted d on d.MegrendelesID=m.ID
-    group by t.VevoID) VevoValtozas on Vevo.ID = VevoValtozas.ID
+    inner join Megrendeles m on m.TelephelyID = t.ID
+    inner join deleted d on d.MegrendelesID = m.ID
+    group by t.VevoID) VevoValtozas on Vevo.ID = VevoValtozas.VevoID
 ```
 
 #### Tesztelés
@@ -243,23 +250,23 @@ inner join
 Nézzük meg az összmegrendelések aktuális értékét, jegyezzük meg a számokat.
 
 ```sql
-select id, osszmegrendeles
-from vevo
+select ID, OsszMegrendeles
+from Vevo
 ```
 
 Módosítsunk egy megrendelés mennyiségén.
 
 ```sql
-update megrendelestetel
-set mennyiseg=3
-where id=1
+update MegrendelesTetel
+set Mennyiseg = 3
+where ID = 1
 ```
 
 Nézzük meg az összegeket ismét, meg kellett változnia a számnak.
 
 ```sql
-select id, osszmegrendeles
-from vevo
+select ID, OsszMegrendeles
+from Vevo
 ```
 
 </details>
